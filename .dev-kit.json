@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "modules": [
+    "cloudflare-pages",
+    "ts"
+  ],
+  "vars": {
+    "BUILD_COMMAND": "pnpm run build",
+    "CF_PROJECT": "cheapest-hours",
+    "DESCRIPTION": "Shows Germany's day-ahead electricity prices and the cheapest time window to run a flexible load.",
+    "DIST_DIR": "dist",
+    "NAME": "Cheapest Hours",
+    "REPO": "o-kangal/cheapest-hours",
+    "SITE_URL": "https://cheapest-hours.pages.dev"
+  },
+  "project": {
+    "permissions": {
+      "allow": [
+        "Edit(functions/**)",
+        "Edit(index.html)"
+      ],
+      "deny": []
+    },
+    "actions": []
+  }
+}

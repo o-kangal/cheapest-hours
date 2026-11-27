@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Edit(TASKS.md)",
+      "Edit(docs/**)",
+      "Edit(README.md)",
+      "Edit(CHANGELOG.md)",
+      "Edit(.gitignore)",
+      "Bash(pnpm *)",
+      "Bash(npm view *)",
+      "Edit(src/**)",
+      "Edit(tests/**)",
+      "Edit(public/**)",
+      "Edit(package.json)",
+      "Edit(tsconfig.json)",
+      "Edit(vite.config.ts)",
+      "Edit(vitest.config.ts)",
+      "Edit(eslint.config.js)",
+      "Edit(functions/**)",
+      "Edit(index.html)"
+    ],
+    "deny": [
+      "Edit(AGENTS.md)",
+      "Edit(.dev-kit.json)",
+      "Bash(rm -rf *)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git reset --hard*)",
+      "Bash(pnpm add *)",
+      "Bash(pnpm install *--no-frozen-lockfile*)",
+      "Bash(npm install *)",
+      "Bash(npx *)"
+    ]
+  }
+}
