@@ -135,7 +135,7 @@ pnpm run typecheck && pnpm run lint && pnpm run test && pnpm run build
 ---
 
 ### Task 6: README and End-to-End Review
-- **Status:** ⏳ Pending
+- **Status:** ✅ Completed (2026-11-27)
 - **Type:** Docs
 - **Human Step:** The owner reviews the running app and the README before anything is deployed.
 - **Read-Only Context Files:** `AGENTS.md`, `SPEC.md`, `TASKS.md`

@@ -15,7 +15,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc -p . && tsc -p functions",
-    "lint": "eslint . && pnpm run format:check",
+    "lint": "eslint . --ignore-pattern '.wrangler/' && pnpm run format:check",
     "test": "vitest run",
     "format": "prettier --write src tests functions index.html vite.config.ts",
     "format:check": "prettier --check src tests functions index.html vite.config.ts"
