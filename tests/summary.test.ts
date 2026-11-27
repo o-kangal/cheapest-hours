@@ -31,6 +31,15 @@ describe('summarize', () => {
     expect(summarize(window(0, 1, -1), 0, 1)).toContain('1.0 ct/kWh below the daily average');
   });
 
+  it('states the difference in ct/kWh when the window itself is negative', () => {
+    // As a percentage this would read "112% below the daily average".
+    expect(summarize(window(12, 15, -0.8), 6.5, 3)).toBe(
+      'Cheapest 3-hour window: 12:00–15:00, avg -0.8 ct/kWh, 7.3 ct/kWh below the daily average.',
+    );
+    // A window at exactly zero is still "100% below", which reads fine.
+    expect(summarize(window(12, 13, 0), 6.5, 1)).toContain('100% below the daily average');
+  });
+
   it('handles a window that is not cheaper than the average', () => {
     // [0, 10, 0] with 2 hours: every window averages 5, the day averages 3.3.
     expect(summarize(window(0, 2, 5), 10 / 3, 2)).toContain('50% above the daily average');

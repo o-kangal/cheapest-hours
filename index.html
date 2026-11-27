@@ -26,13 +26,27 @@
             <h2 id="day-label" class="day-label">Day-ahead prices</h2>
             <p id="day-note" class="day-note"></p>
           </div>
-          <div id="controls" class="controls"></div>
+          <fieldset id="controls" class="controls">
+            <legend class="controls-legend">Run time</legend>
+            <div class="segmented">
+              <label><input type="radio" name="duration" value="1" />1 h</label>
+              <label><input type="radio" name="duration" value="2" />2 h</label>
+              <label><input type="radio" name="duration" value="3" checked />3 h</label>
+              <label><input type="radio" name="duration" value="4" />4 h</label>
+              <label><input type="radio" name="duration" value="5" />5 h</label>
+              <label><input type="radio" name="duration" value="6" />6 h</label>
+            </div>
+          </fieldset>
         </div>
         <div class="status-row">
           <p id="status" class="status" role="status" aria-live="polite"></p>
           <button id="retry" class="button" type="button" hidden>Retry</button>
         </div>
         <div id="chart" class="chart"></div>
+        <ul class="legend">
+          <li><span class="swatch swatch-cheap"></span>Cheapest window</li>
+          <li><span class="swatch swatch-avg"></span>Daily average</li>
+        </ul>
         <p id="summary" class="summary"></p>
       </section>
 

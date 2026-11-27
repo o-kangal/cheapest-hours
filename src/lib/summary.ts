@@ -8,8 +8,9 @@ export function formatCt(ctPerKwh: number): string {
 }
 
 function comparison(windowAvg: number, dailyAvg: number): string {
-  // A percentage of a zero or negative average is meaningless, so state the difference instead.
-  if (dailyAvg <= 0) {
+  // A percentage of a zero or negative average is meaningless, and a negative window would read
+  // as "more than 100% below", so both state the difference in ct/kWh instead.
+  if (dailyAvg <= 0 || windowAvg < 0) {
     const diff = dailyAvg - windowAvg;
     const direction = diff >= 0 ? 'below' : 'above';
     return `${formatCt(Math.abs(diff))} ct/kWh ${direction} the daily average`;

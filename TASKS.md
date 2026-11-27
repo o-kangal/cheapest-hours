@@ -112,7 +112,7 @@ pnpm run typecheck && pnpm run lint && pnpm run test && pnpm run build
 ---
 
 ### Task 5: Chart, Duration Selector and Summary
-- **Status:** ⏳ Pending
+- **Status:** ✅ Completed (2026-11-27)
 - **Type:** Feature
 - **Human Step:** None
 - **Read-Only Context Files:** `AGENTS.md`, `SPEC.md` (§3.2, §4.3–§4.6, §5)
