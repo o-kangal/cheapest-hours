@@ -1,4 +1,4 @@
-/** One market time unit from the API: start as Unix seconds, price in EUR/MWh (null when missing). */
+/** One market time unit from the API: start in Unix seconds, price in EUR/MWh or null. */
 export interface PricePoint {
   readonly start: number;
   readonly eurPerMwh: number | null;

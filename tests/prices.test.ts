@@ -13,7 +13,10 @@ function quarters(prices: readonly (number | null)[], start = DAY_START): PriceP
 function berlinDay(fromIso: string, toIso: string, eurPerMwh = 100): PricePoint[] {
   const from = Date.parse(fromIso) / 1000;
   const count = (Date.parse(toIso) / 1000 - from) / 900;
-  return quarters(Array.from({ length: count }, () => eurPerMwh), from);
+  return quarters(
+    Array.from({ length: count }, () => eurPerMwh),
+    from,
+  );
 }
 
 describe('eurPerMwhToCtPerKwh', () => {

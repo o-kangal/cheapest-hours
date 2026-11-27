@@ -71,15 +71,17 @@ function render(result: DayResult): void {
       dayNote.textContent = '';
       show('empty', 'No prices are published for today or tomorrow yet. Please check back later.');
       return;
-    case 'ok':
+    case 'ok': {
       hours = result.hours;
-      dayLabel.textContent = `${result.isFallback ? 'Today' : 'Tomorrow'} · ${formatDay(result.date)}`;
+      const which = result.isFallback ? 'Today' : 'Tomorrow';
+      dayLabel.textContent = `${which} · ${formatDay(result.date)}`;
       dayNote.textContent = result.isFallback
         ? "Tomorrow's prices are not published yet, so today's are shown."
         : '';
       show('ok');
       update();
       return;
+    }
   }
 }
 

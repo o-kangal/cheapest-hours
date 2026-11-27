@@ -37,7 +37,8 @@ Always run these commands from the repository root:
 - **Install Dependencies:** `pnpm install --frozen-lockfile`
 - **Development:** `pnpm dev`
 - **Type Check:** `pnpm run typecheck`
-- **Linter:** `pnpm run lint`
+- **Linter:** `pnpm run lint` (ESLint, then a Prettier format check)
+- **Format:** `pnpm run format`
 - **Tests:** `pnpm run test`
 - **Production Build:** `pnpm run build`
 

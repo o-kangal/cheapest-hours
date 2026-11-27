@@ -81,20 +81,43 @@ export function renderChart(container: HTMLElement, view: ChartView): void {
       y1: y(tick),
       y2: y(tick),
     });
-    node(svg, 'text', { class: 'axis-label', x: MARGIN.left - 6, y: y(tick), 'text-anchor': 'end', 'dominant-baseline': 'middle' }, tickLabel(tick));
+    node(
+      svg,
+      'text',
+      {
+        class: 'axis-label',
+        x: MARGIN.left - 6,
+        y: y(tick),
+        'text-anchor': 'end',
+        'dominant-baseline': 'middle',
+      },
+      tickLabel(tick),
+    );
   }
 
   if (window) {
     const x = xAt(window.startIndex);
     const bandWidth = (window.endIndex - window.startIndex) * band;
-    node(svg, 'rect', { class: 'window-band', x, y: MARGIN.top, width: bandWidth, height: plotHeight, rx: 4 });
+    node(svg, 'rect', {
+      class: 'window-band',
+      x,
+      y: MARGIN.top,
+      width: bandWidth,
+      height: plotHeight,
+      rx: 4,
+    });
     // Centered over the window, but kept inside the plot so it is not cut off at the edges.
     const halfLabel = 40;
     const labelX = Math.min(
       Math.max(x + bandWidth / 2, MARGIN.left + halfLabel),
       width - MARGIN.right - halfLabel,
     );
-    node(svg, 'text', { class: 'window-label', x: labelX, y: MARGIN.top - 8, 'text-anchor': 'middle' }, `Cheapest ${view.durationHours} h`);
+    node(
+      svg,
+      'text',
+      { class: 'window-label', x: labelX, y: MARGIN.top - 8, 'text-anchor': 'middle' },
+      `Cheapest ${view.durationHours} h`,
+    );
   }
 
   const zero = y(0);
@@ -115,14 +138,30 @@ export function renderChart(container: HTMLElement, view: ChartView): void {
   }
 
   const average = y(view.dailyAvg);
-  node(svg, 'line', { class: 'avg-line', x1: MARGIN.left, x2: width - MARGIN.right, y1: average, y2: average });
-  node(svg, 'text', { class: 'avg-label', x: width - MARGIN.right - 2, y: average - 6, 'text-anchor': 'end' }, `avg ${formatCt(view.dailyAvg)}`);
+  node(svg, 'line', {
+    class: 'avg-line',
+    x1: MARGIN.left,
+    x2: width - MARGIN.right,
+    y1: average,
+    y2: average,
+  });
+  node(
+    svg,
+    'text',
+    { class: 'avg-label', x: width - MARGIN.right - 2, y: average - 6, 'text-anchor': 'end' },
+    `avg ${formatCt(view.dailyAvg)}`,
+  );
 
   // Every third hour, or every sixth on narrow screens, keeps the labels apart.
   const every = band * 3 < 42 ? 6 : 3;
   for (const [i, hour] of hours.entries()) {
     if (i % every !== 0) continue;
-    node(svg, 'text', { class: 'axis-label', x: xAt(i) + band / 2, y: HEIGHT - 8, 'text-anchor': 'middle' }, formatTime(hour.start));
+    node(
+      svg,
+      'text',
+      { class: 'axis-label', x: xAt(i) + band / 2, y: HEIGHT - 8, 'text-anchor': 'middle' },
+      formatTime(hour.start),
+    );
   }
 
   container.replaceChildren(svg);

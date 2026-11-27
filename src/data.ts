@@ -3,7 +3,12 @@ import { addDays, berlinDate } from './lib/time';
 import { parsePriceSeries } from './lib/upstream';
 
 export type DayResult =
-  | { readonly kind: 'ok'; readonly date: string; readonly isFallback: boolean; readonly hours: HourPrice[] }
+  | {
+      readonly kind: 'ok';
+      readonly date: string;
+      readonly isFallback: boolean;
+      readonly hours: HourPrice[];
+    }
   | { readonly kind: 'empty'; readonly date: string }
   | { readonly kind: 'error'; readonly message: string };
 
@@ -32,7 +37,9 @@ async function fetchHours(date: string): Promise<HourPrice[]> {
   }
 
   // Our own proxy, but still checked: a bad deploy should show an error, not a broken chart.
-  const points = isRecord(body) ? parsePriceSeries(body['unixSeconds'], body['priceEurPerMwh']) : null;
+  const points = isRecord(body)
+    ? parsePriceSeries(body['unixSeconds'], body['priceEurPerMwh'])
+    : null;
   if (points === null) throw new LoadError('The server sent prices in an unexpected format.');
   return toHourly(points);
 }

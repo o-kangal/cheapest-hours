@@ -32,7 +32,8 @@ export const onRequestGet: PagesFunction = async (context) => {
   if (cached) return cached;
 
   // Only the validated date goes into the upstream URL; the bidding zone is fixed.
-  const upstreamUrl = `${UPSTREAM}?${new URLSearchParams({ bzn: 'DE-LU', start: date, end: date }).toString()}`;
+  const query = new URLSearchParams({ bzn: 'DE-LU', start: date, end: date });
+  const upstreamUrl = `${UPSTREAM}?${query.toString()}`;
 
   let upstream: Response;
   try {

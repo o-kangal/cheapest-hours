@@ -18,7 +18,9 @@ function stubApi(responses: Record<string, () => Response>): string[] {
     const date = new URL(input, 'http://localhost').searchParams.get('date') ?? '';
     asked.push(date);
     const respond = responses[date];
-    return Promise.resolve(respond ? respond() : Response.json({ error: 'unexpected' }, { status: 500 }));
+    return Promise.resolve(
+      respond ? respond() : Response.json({ error: 'unexpected' }, { status: 500 }),
+    );
   });
   return asked;
 }
@@ -28,7 +30,7 @@ afterEach(() => {
 });
 
 describe('loadDay', () => {
-  it("shows tomorrow when it is published, without asking for today", async () => {
+  it('shows tomorrow when it is published, without asking for today', async () => {
     const asked = stubApi({ '2026-11-28': () => Response.json(day('2026-11-28', TOMORROW_START)) });
     const result = await loadDay(NOW);
     expect(result).toMatchObject({ kind: 'ok', date: '2026-11-28', isFallback: false });
@@ -54,7 +56,8 @@ describe('loadDay', () => {
 
   it('reports a server error with its message instead of falling back', async () => {
     const asked = stubApi({
-      '2026-11-28': () => Response.json({ error: 'The price source answered 429.' }, { status: 502 }),
+      '2026-11-28': () =>
+        Response.json({ error: 'The price source answered 429.' }, { status: 502 }),
     });
     expect(await loadDay(NOW)).toEqual({
       kind: 'error',
@@ -65,11 +68,17 @@ describe('loadDay', () => {
 
   it('reports a network failure', async () => {
     vi.stubGlobal('fetch', () => Promise.reject(new TypeError('Failed to fetch')));
-    expect(await loadDay(NOW)).toMatchObject({ kind: 'error', message: expect.stringContaining('could not be reached') });
+    expect(await loadDay(NOW)).toMatchObject({
+      kind: 'error',
+      message: expect.stringContaining('could not be reached'),
+    });
   });
 
   it('reports a malformed response', async () => {
     stubApi({ '2026-11-28': () => Response.json({ unixSeconds: [1, 2], priceEurPerMwh: [3] }) });
-    expect(await loadDay(NOW)).toMatchObject({ kind: 'error', message: expect.stringContaining('unexpected format') });
+    expect(await loadDay(NOW)).toMatchObject({
+      kind: 'error',
+      message: expect.stringContaining('unexpected format'),
+    });
   });
 });
