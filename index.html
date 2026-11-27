@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Germany's day-ahead electricity prices and the cheapest time window to run a flexible load."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Cheapest Hours</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <h1 class="title">Cheapest Hours</h1>
+        <p class="subtitle">
+          German day-ahead electricity prices and the cheapest time to run a flexible load.
+        </p>
+      </header>
+
+      <section class="card" aria-labelledby="day-label">
+        <div class="card-head">
+          <h2 id="day-label" class="day-label"></h2>
+          <div id="controls" class="controls"></div>
+        </div>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+        <div id="chart" class="chart"></div>
+        <p id="summary" class="summary"></p>
+      </section>
+
+      <footer class="footer">
+        <p>
+          Data: <a href="https://www.energy-charts.info/">Energy-Charts</a> (Fraunhofer ISE), from
+          Bundesnetzagentur | SMARD.de, licensed
+          <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+          <a href="https://github.com/o-kangal/cheapest-hours">Source on GitHub</a>.
+        </p>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

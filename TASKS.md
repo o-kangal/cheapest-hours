@@ -19,7 +19,7 @@
 ## Ordered Task Breakdown
 
 ### Task 1: Project Scaffold
-- **Status:** ⏳ Pending
+- **Status:** ✅ Completed (2026-11-27)
 - **Type:** Setup
 - **Human Step:** None
 - **Read-Only Context Files:** `AGENTS.md`, `SPEC.md`, `tsconfig.json`, `eslint.config.js`, `.github/workflows/ci.yml`

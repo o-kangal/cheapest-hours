@@ -1,0 +1,6 @@
+# Install scripts are blocked by default; only these packages may run theirs.
+allowBuilds:
+  # Native binary used by wrangler to bundle the Pages Functions.
+  esbuild: true
+  # Cloudflare's local runtime behind `wrangler pages dev`.
+  workerd: true

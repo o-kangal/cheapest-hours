@@ -78,6 +78,7 @@ Always run these commands from the repository root:
 - **TypeScript 7 breaks the lint setup:** typescript-eslint 8 supports `typescript` up to `<6.1.0`. Stay on 6.0.x until typescript-eslint supports 7.
 - **15-minute prices:** since October 2025 the day-ahead market (and Energy-Charts) uses 15-minute periods: 96 points per day, 92/100 on DST days. The app averages them to hours (SPEC §4.2).
 - **Energy-Charts rate limit:** a few quick requests already return `429 Too Many Requests`. Don't loop over the live API in scripts or tests; tests use fixtures, the proxy caches.
+- **pnpm 12 blocks install scripts:** `pnpm install` fails with ERR_PNPM_IGNORED_BUILDS until a package is listed under `allowBuilds` in `pnpm-workspace.yaml`. Only `esbuild` and `workerd` are allowed; add others only when they truly need a postinstall.
 
 ---
 
