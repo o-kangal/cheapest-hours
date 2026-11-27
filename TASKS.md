@@ -43,7 +43,7 @@ test -f dist/index.html && ! find dist -name '*.map' | grep -q .
 ---
 
 ### Task 2: Pure Domain Logic and Unit Tests
-- **Status:** ⏳ Pending
+- **Status:** ✅ Completed (2026-11-27)
 - **Type:** Feature
 - **Human Step:** None
 - **Read-Only Context Files:** `AGENTS.md`, `SPEC.md` (§4.1–§4.6)
