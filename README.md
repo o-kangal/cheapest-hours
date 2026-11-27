@@ -42,6 +42,7 @@ The domain logic in [`src/lib/`](src/lib) has no DOM, network or clock access, s
 | **A Pages Function proxies the API** | Energy-Charts does not allow cross-origin requests from browsers. |
 | **Responses are cached for 15 minutes** | The API rate-limits after a few quick requests. With the edge cache, each Cloudflare location asks upstream at most once per day and quarter of an hour. |
 | **The proxy is closed** | It takes only a validated date in a four-day range and fixes the bidding zone, so it cannot be used as an open proxy or to drain the rate limit. |
+| **Strict security headers** | A Content-Security-Policy that allows only the site's own files (no inline scripts, no third parties), plus HSTS, `nosniff`, a strict referrer policy and immutable caching for hashed assets ([`public/_headers`](public/_headers)). |
 | **Plain SVG instead of a chart library** | One bar chart with a highlight does not need a dependency; the SVG is sized in CSS pixels, so labels stay legible on phones. |
 | **Berlin time everywhere** | Day boundaries and labels follow `Europe/Berlin`, whatever the viewer's time zone. A window ending at midnight reads `24:00`. |
 | **Percentages only where they make sense** | When the daily average is zero or negative, or the window itself is negative, the summary states the difference in ct/kWh instead of a percentage. |

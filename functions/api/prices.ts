@@ -12,6 +12,8 @@ function json(body: unknown, status: number, cacheSeconds = 0): Response {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': cacheSeconds > 0 ? `public, max-age=${cacheSeconds}` : 'no-store',
+      // public/_headers covers static files only; Function responses set their own.
+      'X-Content-Type-Options': 'nosniff',
     },
   });
 }
