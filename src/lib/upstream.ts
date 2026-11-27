@@ -1,4 +1,5 @@
 import type { PricePoint } from './prices';
+import { addDays, berlinDate } from './time';
 
 const DATE_PATTERN = /^(\d{4})-(\d{2})-(\d{2})$/;
 
@@ -21,6 +22,17 @@ export function parseDateParam(params: URLSearchParams): string | null {
   if (keys.length !== 1 || keys[0] !== 'date') return null;
   const date = params.get('date');
   return date !== null && isCalendarDate(date) ? date : null;
+}
+
+/**
+ * The app only ever asks for today and tomorrow. The proxy serves yesterday to the day after
+ * tomorrow (Berlin dates), one day of slack on each side for clocks around midnight, so nobody
+ * can walk through dates to bypass the cache and spend the upstream rate limit.
+ */
+export function isServedDate(date: string, nowMs: number): boolean {
+  const today = berlinDate(nowMs);
+  // `YYYY-MM-DD` strings sort like the dates they name.
+  return date >= addDays(today, -1) && date <= addDays(today, 2);
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

@@ -1,7 +1,7 @@
 // GET /api/prices?date=YYYY-MM-DD → one Berlin day of DE-LU day-ahead prices (SPEC §4.7).
 // Energy-Charts does not allow cross-origin requests from browsers, so the page asks this
 // function instead. Responses are cached at the edge because the API rate-limits quickly.
-import { parseDateParam, parseUpstream } from '../../src/lib/upstream';
+import { isServedDate, parseDateParam, parseUpstream } from '../../src/lib/upstream';
 
 const UPSTREAM = 'https://api.energy-charts.info/price';
 const CACHE_SECONDS = 15 * 60;
@@ -21,6 +21,9 @@ export const onRequestGet: PagesFunction = async (context) => {
   const date = parseDateParam(url.searchParams);
   if (date === null) {
     return json({ error: 'Expected exactly one query parameter: date=YYYY-MM-DD.' }, 400);
+  }
+  if (!isServedDate(date, Date.now())) {
+    return json({ error: 'Only dates from yesterday to the day after tomorrow are served.' }, 400);
   }
 
   // The key is rebuilt from the validated date, so equivalent requests share one cache entry.

@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { isCalendarDate, parseDateParam, parsePriceSeries, parseUpstream } from '../src/lib/upstream';
+import {
+  isCalendarDate,
+  isServedDate,
+  parseDateParam,
+  parsePriceSeries,
+  parseUpstream,
+} from '../src/lib/upstream';
 
 describe('parseUpstream', () => {
   it('turns a valid Energy-Charts body into points', () => {
@@ -72,5 +78,30 @@ describe('parseDateParam', () => {
     expect(parse('date=2026-11-28&date=2026-11-29')).toBeNull();
     expect(parse('start=2026-11-28')).toBeNull();
     expect(parse('date=2026-11-28%26bzn%3DFR')).toBeNull();
+  });
+});
+
+describe('isServedDate', () => {
+  // 2026-11-27 23:30 in Berlin: still the 27th there, already late evening.
+  const now = Date.parse('2026-11-27T22:30:00Z');
+
+  it('serves yesterday to the day after tomorrow, in Berlin dates', () => {
+    expect(isServedDate('2026-11-26', now)).toBe(true);
+    expect(isServedDate('2026-11-27', now)).toBe(true);
+    expect(isServedDate('2026-11-28', now)).toBe(true);
+    expect(isServedDate('2026-11-29', now)).toBe(true);
+  });
+
+  it('refuses dates outside that range', () => {
+    expect(isServedDate('2026-11-25', now)).toBe(false);
+    expect(isServedDate('2026-11-30', now)).toBe(false);
+    expect(isServedDate('2020-01-01', now)).toBe(false);
+  });
+
+  it('moves with the Berlin day, not the UTC day', () => {
+    // 2026-11-27 23:30 UTC is already the 28th in Berlin.
+    const afterBerlinMidnight = Date.parse('2026-11-27T23:30:00Z');
+    expect(isServedDate('2026-11-30', afterBerlinMidnight)).toBe(true);
+    expect(isServedDate('2026-11-26', afterBerlinMidnight)).toBe(false);
   });
 });
