@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, berlinDate, formatRange, formatTime } from '../src/lib/time';
+import { addDays, berlinDate, formatDay, formatRange, formatTime } from '../src/lib/time';
 import { DAY_START } from './helpers';
 
 describe('berlinDate', () => {
@@ -40,5 +40,12 @@ describe('formatRange', () => {
 
   it('shows a window ending at midnight as ending at 24:00', () => {
     expect(formatRange(DAY_START + 21 * 3600, DAY_START + 24 * 3600)).toBe('21:00–24:00');
+  });
+});
+
+describe('formatDay', () => {
+  it('names the calendar date, whatever the runtime time zone', () => {
+    expect(formatDay('2026-11-28')).toBe('Sat, 28 Nov 2026');
+    expect(formatDay('2027-01-01')).toBe('Fri, 1 Jan 2027');
   });
 });

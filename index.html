@@ -20,12 +20,18 @@
         </p>
       </header>
 
-      <section class="card" aria-labelledby="day-label">
+      <section id="card" class="card" aria-labelledby="day-label" data-state="loading">
         <div class="card-head">
-          <h2 id="day-label" class="day-label"></h2>
+          <div>
+            <h2 id="day-label" class="day-label">Day-ahead prices</h2>
+            <p id="day-note" class="day-note"></p>
+          </div>
           <div id="controls" class="controls"></div>
         </div>
-        <p id="status" class="status" role="status" aria-live="polite"></p>
+        <div class="status-row">
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+          <button id="retry" class="button" type="button" hidden>Retry</button>
+        </div>
         <div id="chart" class="chart"></div>
         <p id="summary" class="summary"></p>
       </section>

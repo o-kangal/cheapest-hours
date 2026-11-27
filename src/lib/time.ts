@@ -50,3 +50,16 @@ export function formatRange(start: number, end: number): string {
   const endLabel = formatTime(end);
   return `${formatTime(start)}–${endLabel === '00:00' ? '24:00' : endLabel}`;
 }
+
+const dayFormat = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'UTC',
+  weekday: 'short',
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+});
+
+/** `Sat, 28 Nov 2026` for a `YYYY-MM-DD` date (a calendar date, so no time zone shift). */
+export function formatDay(date: string): string {
+  return dayFormat.format(new Date(`${date}T00:00:00Z`));
+}

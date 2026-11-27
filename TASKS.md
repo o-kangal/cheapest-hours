@@ -92,7 +92,7 @@ pnpm run typecheck && pnpm run lint && pnpm run test && pnpm run build
 ---
 
 ### Task 4: Data Layer and Page States
-- **Status:** ⏳ Pending
+- **Status:** ✅ Completed (2026-11-27)
 - **Type:** Feature
 - **Human Step:** None
 - **Read-Only Context Files:** `AGENTS.md`, `SPEC.md` (§3, §4.1), `src/lib/*.ts`
