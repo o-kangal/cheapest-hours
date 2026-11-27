@@ -36,7 +36,7 @@ Success: a visitor sees the day's price curve and gets the cheapest window for t
 4. **No fitting window:** when no run of N consecutive hours exists (including N longer than the data), there is no window; the UI says so instead of showing a partial one.
 5. **Summary line:** `Cheapest N-hour window: HH:MM–HH:MM, avg X.X ct/kWh, P% below the daily average.` The daily average is the mean of all hourly prices of the day; P = (daily avg − window avg) / daily avg, rounded to a whole percent. When the daily average is zero or negative a percentage is meaningless, so the line states the difference in ct/kWh instead (`… avg X.X ct/kWh, D.D ct/kWh below the daily average.`). A window that ends at midnight is shown as ending at `24:00`.
 6. **Chart:** one bar per hour in ct/kWh, with negative bars below the zero line, the hours of the cheapest window highlighted, and a dashed line for the daily average. Hour labels are Berlin time.
-7. **Proxy:** `GET /api/prices?date=YYYY-MM-DD` returns that Berlin day's prices for `DE-LU` from Energy-Charts. Any other or malformed input → `400`. Upstream failures → `502`. Successful responses are cached at the edge for 15 minutes.
+7. **Proxy:** `GET /api/prices?date=YYYY-MM-DD` returns that Berlin day's prices for `DE-LU` from Energy-Charts. Any other or malformed input → `400`. A day that is not published yet → `200` with no prices; other upstream failures → `502`. Successful responses are cached at the edge for 15 minutes.
 8. **Attribution:** the page credits the data source as the API requires: Energy-Charts (Fraunhofer ISE), data from Bundesnetzagentur | SMARD.de, licensed CC BY 4.0.
 
 ## 5. Non-Functional Requirements
@@ -46,4 +46,4 @@ Success: a visitor sees the day's price curve and gets the cheapest window for t
 - **Supported platforms / browsers:** current evergreen browsers, desktop and mobile; usable at 360 px width.
 
 ## 6. Open Questions
-- **Unpublished day (before Task 3):** what Energy-Charts returns for a day that is not published yet (empty arrays, `404`, or something else) could not be checked yet because of the rate limit. Task 3 checks it once and handles it as "no data".
+- None open. (Resolved 2026-11-27: for an unpublished day Energy-Charts answers `404` "no content available"; the proxy treats it as a day without prices, see §4.7.)

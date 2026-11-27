@@ -14,7 +14,7 @@
     "dev:full": "vite build && wrangler pages dev dist",
     "build": "vite build",
     "preview": "vite preview",
-    "typecheck": "tsc -p .",
+    "typecheck": "tsc -p . && tsc -p functions",
     "lint": "eslint .",
     "test": "vitest run"
   },

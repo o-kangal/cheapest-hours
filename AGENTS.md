@@ -79,6 +79,7 @@ Always run these commands from the repository root:
 - **15-minute prices:** since October 2025 the day-ahead market (and Energy-Charts) uses 15-minute periods: 96 points per day, 92/100 on DST days. The app averages them to hours (SPEC §4.2).
 - **Energy-Charts rate limit:** a few quick requests already return `429 Too Many Requests`. Don't loop over the live API in scripts or tests; tests use fixtures, the proxy caches.
 - **pnpm 12 blocks install scripts:** `pnpm install` fails with ERR_PNPM_IGNORED_BUILDS until a package is listed under `allowBuilds` in `pnpm-workspace.yaml`. Only `esbuild` and `workerd` are allowed; add others only when they truly need a postinstall.
+- **Unpublished day is a 404:** Energy-Charts answers `404` "no content available" (text/plain) for a day without prices; only that status means "no data", every other failure is a `502`.
 
 ---
 

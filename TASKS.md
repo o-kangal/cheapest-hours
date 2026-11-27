@@ -12,7 +12,7 @@
 ---
 
 ## Open Decisions (resolve before the task named in each item)
-1. **Unpublished day response (before Task 3):** what Energy-Charts returns for a day that has no prices yet; checked once with a single request in Task 3 (SPEC §6).
+1. ~~**Unpublished day response (before Task 3)**~~ **Resolved 2026-11-27:** Energy-Charts answers `404` with `text/plain` "no content available". The proxy maps it to `200` with empty arrays ("no data"); every other non-2xx, including `429`, becomes `502`.
 
 ---
 
@@ -66,7 +66,7 @@ pnpm run typecheck && pnpm run lint && pnpm run test
 ---
 
 ### Task 3: `/api/prices` Proxy with Edge Cache
-- **Status:** ⏳ Pending
+- **Status:** ✅ Completed (2026-11-27)
 - **Type:** Feature
 - **Human Step:** None
 - **Read-Only Context Files:** `AGENTS.md`, `SPEC.md` (§4.7), `src/lib/prices.ts`
