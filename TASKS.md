@@ -155,7 +155,7 @@ grep -rn "TODO(dev-kit)" . --exclude-dir=node_modules --exclude-dir=.git || echo
 ---
 
 ### Task 7: Publish
-- **Status:** ⏳ Pending
+- **Status:** ✅ Completed (2026-11-27)
 - **Type:** Release
 - **Human Step:** The owner creates the GitHub repository, applies `docs/github-settings.md`, does the one-time Cloudflare setup of `docs/deploy.md` (API token and account ID as repository secrets), and pushes.
 - **Read-Only Context Files:** `docs/deploy.md`, `docs/github-settings.md`

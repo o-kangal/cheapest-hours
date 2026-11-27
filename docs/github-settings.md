@@ -49,3 +49,12 @@ Every commit also records your email address, which is visible on a public repos
 
 | Setting | Date |
 |---|---|
+| Default `GITHUB_TOKEN` permissions: read-only, cannot approve PRs | 2026-11-27 |
+| Allowed actions: GitHub-owned plus `pnpm/action-setup@*` | 2026-11-27 |
+| Dependabot alerts and security updates | 2026-11-27 |
+| Squash-only merges, merged branches deleted | 2026-11-27 |
+| Rulesets "Protect main" and "Protect release tags" | 2026-11-27 |
+| Private vulnerability reporting | 2026-11-27 |
+| Secret scanning and push protection | 2026-11-27 |
+| Approval for workflow runs from external contributors | 2026-11-27 |
+| Secrets `CLOUDFLARE_API_TOKEN` (Pages: Edit, expires 2027-11-27) and `CLOUDFLARE_ACCOUNT_ID` | 2026-11-27 |
