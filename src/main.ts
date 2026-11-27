@@ -5,6 +5,7 @@ import { dailyAverage, type HourPrice } from './lib/prices';
 import { formatCt, summarize } from './lib/summary';
 import { formatDay } from './lib/time';
 import { findCheapestWindow } from './lib/window';
+import { setUpThemeToggle } from './theme';
 
 /** Looks up an element of the page shell and checks its type at runtime. */
 function element<T extends HTMLElement>(selector: string, type: new () => T): T {
@@ -21,6 +22,8 @@ const retry = element('#retry', HTMLButtonElement);
 const controls = element('#controls', HTMLFieldSetElement);
 const chart = element('#chart', HTMLDivElement);
 const summary = element('#summary', HTMLParagraphElement);
+
+setUpThemeToggle(element('#theme-toggle', HTMLButtonElement));
 
 type ViewState = 'loading' | 'error' | 'empty' | 'ok';
 

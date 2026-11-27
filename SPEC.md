@@ -13,7 +13,7 @@ Success: a visitor sees the day's price curve and gets the cheapest window for t
 
 ## 2. Scope
 - **In scope:** German–Luxembourg (`DE-LU`) day-ahead prices for one day (tomorrow, or today when tomorrow is not published yet); an hourly chart in ct/kWh; a duration selector (1–6 h); the cheapest contiguous window and a summary line; loading, error and empty states.
-- **Out of scope (for now):** other bidding zones, choosing a date, grid fees and taxes (end-customer prices), windows that cross midnight into the next day, user accounts or saved settings, notifications.
+- **Out of scope (for now):** other bidding zones, choosing a date, grid fees and taxes (end-customer prices), windows that cross midnight into the next day, user accounts or saved settings (apart from the light/dark theme choice, kept in the browser), notifications.
 
 ## 3. Users & Key Flows
 

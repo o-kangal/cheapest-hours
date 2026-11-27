@@ -24,7 +24,8 @@
 ├── functions/api/          Cloudflare Pages Functions (server side). Own tsconfig with Workers types;
 │                           must not import from src/ except src/lib.
 ├── tests/                  Vitest unit tests for src/lib and the proxy's input validation.
-├── public/                 Static assets copied as they are (favicon).
+├── public/                 Static files copied as they are: favicon, and theme.js, which applies
+│                           the saved theme before the first paint.
 └── docs/                   Deploy and GitHub setup notes. docs/private/ stays git-ignored.
 ```
 

@@ -1,30 +1,26 @@
 :root {
-  --bg: #f6f7f9;
-  --surface: #ffffff;
-  --text: #16181d;
-  --muted: #5d6470;
-  --border: #e2e5ea;
-  --bar: #c5cbd5;
-  --accent: #0f7b5f;
-  --accent-soft: #d8f0e8;
-  --danger: #b42318;
+  /* Each token is light-dark(light, dark); `color-scheme` picks one (system or theme switch). */
+  color-scheme: light dark;
+  --bg: light-dark(#f6f7f9, #0f1115);
+  --surface: light-dark(#ffffff, #171a20);
+  --text: light-dark(#16181d, #e8eaee);
+  --muted: light-dark(#5d6470, #9aa2ae);
+  --border: light-dark(#e2e5ea, #2a2f38);
+  --bar: light-dark(#c5cbd5, #3a414d);
+  --accent: light-dark(#0f7b5f, #3ccf9e);
+  --accent-soft: light-dark(#d8f0e8, #143a2e);
+  --danger: light-dark(#b42318, #f97066);
   --radius: 12px;
   --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  color-scheme: light dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f1115;
-    --surface: #171a20;
-    --text: #e8eaee;
-    --muted: #9aa2ae;
-    --border: #2a2f38;
-    --bar: #3a414d;
-    --accent: #3ccf9e;
-    --accent-soft: #143a2e;
-    --danger: #f97066;
-  }
+/* Set by the theme switch; without it the page follows the system setting. */
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
 }
 
 *,
@@ -53,7 +49,54 @@ a {
 }
 
 .header {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
   margin-bottom: 24px;
+}
+
+.theme-toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* The icon shows the theme a click switches to; pure CSS, so it is right from the first paint. */
+.icon-sun,
+:root[data-theme='dark'] .icon-moon {
+  display: none;
+}
+
+:root[data-theme='dark'] .icon-sun {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .icon-moon {
+    display: none;
+  }
+
+  :root:not([data-theme='light']) .icon-sun {
+    display: block;
+  }
 }
 
 .title {
