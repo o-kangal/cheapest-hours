@@ -82,6 +82,7 @@ Always run these commands from the repository root:
 - **Energy-Charts rate limit:** a few quick requests already return `429 Too Many Requests`. Don't loop over the live API in scripts or tests; tests use fixtures, the proxy caches.
 - **pnpm 12 blocks install scripts:** `pnpm install` fails with ERR_PNPM_IGNORED_BUILDS until a package is listed under `allowBuilds` in `pnpm-workspace.yaml`. Only `esbuild` and `workerd` are allowed; add others only when they truly need a postinstall.
 - **Unpublished day is a 404:** Energy-Charts answers `404` "no content available" (text/plain) for a day without prices; only that status means "no data", every other failure is a `502`.
+- **Fresh packages fail CI:** pnpm rejects versions younger than a day (`minimumReleaseAge`, `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`) in CI, but a local install can pass because pnpm caches a passing lockfile check. Pick versions at least a day old (`npm view <pkg> time`); `@cloudflare/workers-types` publishes daily.
 
 ---
 
