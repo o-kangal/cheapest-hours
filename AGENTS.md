@@ -14,6 +14,7 @@
 ```
 .
 ├── index.html              Page shell: static markup only, no inline scripts.
+├── 404.html                Served with status 404 for unknown paths; built by Vite like index.html.
 ├── src/
 │   ├── lib/                Pure domain logic: aggregation, cheapest window, Berlin time, formatting.
 │   │                       No DOM, no fetch, no Date.now(); everything is passed in.

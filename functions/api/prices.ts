@@ -6,10 +6,16 @@ import { isServedDate, parseDateParam, parseUpstream } from '../../src/lib/upstr
 const UPSTREAM = 'https://api.energy-charts.info/price';
 const CACHE_SECONDS = 15 * 60;
 
-function json(body: unknown, status: number, cacheSeconds = 0): Response {
+function json(
+  body: unknown,
+  status: number,
+  cacheSeconds = 0,
+  extraHeaders: Record<string, string> = {},
+): Response {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
+      ...extraHeaders,
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': cacheSeconds > 0 ? `public, max-age=${cacheSeconds}` : 'no-store',
       // public/_headers covers static files only; Function responses set their own.
@@ -18,7 +24,7 @@ function json(body: unknown, status: number, cacheSeconds = 0): Response {
   });
 }
 
-export const onRequestGet: PagesFunction = async (context) => {
+async function handleGet(context: EventContext<unknown, string, unknown>): Promise<Response> {
   const url = new URL(context.request.url);
   const date = parseDateParam(url.searchParams);
   if (date === null) {
@@ -70,4 +76,19 @@ export const onRequestGet: PagesFunction = async (context) => {
   );
   context.waitUntil(caches.default.put(cacheKey, response.clone()));
   return response;
+}
+
+/**
+ * One handler for every method: GET serves the prices, HEAD the same headers without a body,
+ * and anything else is refused with 405. With only a GET handler, Pages answered HEAD with the
+ * HTML page.
+ */
+export const onRequest: PagesFunction = async (context) => {
+  const { method } = context.request;
+  if (method === 'GET') return handleGet(context);
+  if (method === 'HEAD') {
+    const response = await handleGet(context);
+    return new Response(null, response);
+  }
+  return json({ error: 'Only GET and HEAD are supported.' }, 405, 0, { Allow: 'GET, HEAD' });
 };
